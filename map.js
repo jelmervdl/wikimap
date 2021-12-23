@@ -126,10 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			type: 'symbol',
 			source: 'wikipedia',
 			filter: ['!', ['has', 'point_count']],
-			paint: {
+			layout: {
 				'text-field': ['get', 'title'],
 				'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-				'text-size': 12
+				'text-size': 12,
+				'text-anchor': 'top'
 			}
 		});
 	});
