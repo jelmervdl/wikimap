@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			map.getCanvas().style.cursor = '';
 		});
 
+		/*
 		map.on('click', 'unclustered-point', (e) => {
 			// Copy coordinates array.
 			const feature = e.features[0];
@@ -162,6 +163,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				.setLngLat(coordinates)
 				.setHTML(description.outerHTML)
 				.addTo(map);
+		});
+		*/
+
+		map.on('click', 'unclustered-point', (e) => {
+			const feature = e.features[0];
+			window.open(`http://nl.wikipedia.org/?curid=${feature.properties.pageid}`, '_blank', 'noopener,noreferrer');
 		});
 	});
 
