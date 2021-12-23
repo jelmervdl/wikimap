@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			const coordinates = feature.geometry.coordinates.slice();
 			const description = document.createElement('a');
 			description.textContent = feature.properties.title;
-			description.href = `http://en.wikipedia.org/?curid=${feature.properties.pageid}`;
+			description.href = `http://nl.wikipedia.org/?curid=${feature.properties.pageid}`;
 			description.target = '_blank';
 			 
 			// Ensure that if the map is zoomed out such that multiple
