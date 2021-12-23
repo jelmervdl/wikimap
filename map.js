@@ -133,6 +133,36 @@ document.addEventListener('DOMContentLoaded', function() {
 				'text-anchor': 'top'
 			}
 		});
+
+		map.on('mouseenter', 'unclustered-point', () => {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		 
+		map.on('mouseleave', 'unclustered-point', () => {
+			map.getCanvas().style.cursor = '';
+		});
+
+		map.on('click', 'unclustered-point', (e) => {
+			// Copy coordinates array.
+			const feature = e.features[0];
+			const coordinates = feature.geometry.coordinates.slice();
+			const description = document.createElement('a');
+			description.textContent = feature.properties.title;
+			description.href = `http://en.wikipedia.org/?curid=${feature.properties.pageid}`;
+			description.target = '_blank';
+			 
+			// Ensure that if the map is zoomed out such that multiple
+			// copies of the feature are visible, the popup appears
+			// over the copy being pointed to.
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			 
+			new mapboxgl.Popup()
+				.setLngLat(coordinates)
+				.setHTML(description.outerHTML)
+				.addTo(map);
+		});
 	});
 
 	map.on('load', fetchData);
